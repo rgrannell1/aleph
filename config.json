@@ -1,0 +1,47 @@
+{
+  "fpath": "/home/rg/Code",
+  "extensions": [
+    ".go",
+    ".js",
+    ".jsx",
+    ".py",
+    ".ts",
+    ".tsx"
+  ],
+  "ignored_folders": [
+    "__pycache__",
+    "_site",
+    ".git",
+    ".github",
+    ".ipynb_checkpoints",
+    ".netlify",
+    ".nyc_output",
+    "build",
+    "dist",
+    "go",
+    "mod",
+    "node_modules",
+    "public"
+  ],
+  "ignored_projects": [
+    ".vscode",
+    "badger2",
+    "candidate-projects",
+    "distinct",
+    "dumbdb",
+    "go-testing",
+    "Imger",
+    "kJ",
+    "magi",
+    "obsidian",
+    "otter-say",
+    "personal-eleventy",
+    "pkg",
+    "runonchange",
+    "sleep",
+    "trace-reads",
+    "tview",
+    "TviewTest",
+    "workspaces"
+  ]
+}
