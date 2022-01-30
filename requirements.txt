@@ -1,2 +1,2 @@
-comby==0.03
+comby==0.0.3
 pytest==6.2.5
