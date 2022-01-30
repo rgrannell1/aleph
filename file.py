@@ -2,38 +2,33 @@
 import collections
 import os
 import pathlib
+from typing import Generator
 from comby_matcher import CombyMatcher
 from config import Config
 
 
-class CodeBase:
-  def __init__(self, config: Config):
-    self.cfg = config
-
-  def list_projects(self) -> None:
-    children = os.listdir(self.cfg.fpath)
-
-    for child in children:
-      child_path = os.path.join(self.cfg.fpath, child)
-
-      if os.path.isdir(child_path) and child not in self.cfg.ignored_projects:
-        yield Project(child_path, self.cfg)
-
-
 class Project:
+  """Represents a project-folder"""
+
   def __init__(self, fpath: str, cfg: Config):
     self.fpath = fpath
     self.cfg = cfg
 
   def is_ignored_folder(self, dir: str) -> bool:
+    """Is a folder ignored (e.g node_modules)"""
+
     return os.path.basename(dir) in self.cfg.ignored_folders
 
   def is_ignored_file(self, file: str) -> bool:
+    """Should a file be ignored?"""
+
     ext = pathlib.Path(file).suffix
 
     return ext not in self.cfg.extensions
 
   def list_source_files(self):
+    """List all non-ignored source-files in a project"""
+
     queue = collections.deque([self.fpath])
 
     while len(queue) > 0:
@@ -55,11 +50,33 @@ class Project:
         pass
 
 
+class CodeBase:
+  """A class representing a code-base"""
+
+  def __init__(self, config: Config):
+    self.cfg = config
+
+  def list_projects(self) -> Generator[Project, None, None]:
+    """List all projects in a code-base"""
+
+    children = os.listdir(self.cfg.fpath)
+
+    for child in children:
+      child_path = os.path.join(self.cfg.fpath, child)
+
+      if os.path.isdir(child_path) and child not in self.cfg.ignored_projects:
+        yield Project(child_path, self.cfg)
+
+
 class ProjectFile:
+  """Represents a non-ignored project-file"""
+
   def __init__(self, fpath: str):
     self.fpath = fpath
 
   def matches(self):
+    """Extract useful information from a project-file"""
+
     fpath = self.fpath
     ext = pathlib.Path(fpath).suffix
 

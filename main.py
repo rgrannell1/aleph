@@ -2,6 +2,9 @@
 from config import Config
 from file import CodeBase, ProjectFile
 import sqlite3
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 def main():
@@ -11,11 +14,13 @@ def main():
 
   for project in base.list_projects():
     for fpath in project.list_source_files():
-      for match in ProjectFile(fpath).matches():
-        print(match)
+      logging.info(f"analysing {fpath}")
 
+      for match in ProjectFile(fpath).matches():
         if match:
           match.create_table(conn)
           match.write(conn)
+
+  conn.close()
 
 main()

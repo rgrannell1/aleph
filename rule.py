@@ -1,4 +1,6 @@
 
+import comby
+import logging
 from abc import abstractmethod
 
 
@@ -17,4 +19,5 @@ class RuleMatch:
 
 
 class Rule:
-  pass
+  def log(name: str, match: comby.Match):
+    logging.info(f"Matched {name}\n\n{match.matched}\n\n")

@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "ℵ",
+      "type": "python",
+      "request": "launch",
+      "console": "integratedTerminal",
+      "program": "main.py",
+      "args": []
+    }
+  ]
+}

@@ -8,6 +8,8 @@ class GoMethod(Rule):
 
   @classmethod
   def matches(cls, fpath: str, content: str) -> RuleMatch:
+    """"""
+
     comby = Comby()
     for match in comby.matches(content, cls.pattern):
       raise Exception(10)
@@ -20,6 +22,8 @@ class GoFunction(Rule):
 
   @classmethod
   def matches(cls, fpath: str, content: str) -> RuleMatch:
+    """"""
+
     comby = Comby()
     for match in comby.matches(content, cls.pattern):
       raise Exception(11)
