@@ -27,6 +27,14 @@ Aleph extracts codebase information into a sqlite database. This information inc
 - Go
 - Js/Ts/Jsx/Tsx
 
+## Build
+
+Aleph uses bs (a thin shell wrapper) as a build-system
+
+```bash
+bs test
+```
+
 ## License
 
 The MIT License

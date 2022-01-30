@@ -10,7 +10,8 @@ class TestGoMultiImport(unittest.TestCase):
           "a",
           "b",
           "c",
-        )''', ['a', 'b', 'c'])
+        )''', ['a', 'b', 'c']),
+        ('''import ("a")''', ['a'])
     ]
 
     for src, packages in cases:
