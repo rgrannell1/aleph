@@ -20,7 +20,7 @@ class FunctionRuleMatch(RuleMatch):
     '''
     curr = conn.cursor()
     curr.execute(sql)
-    curr.commit()
+    conn.commit()
 
   def write(self, conn):
     sql = 'insert into function (name, file, startLine, startCol, startOffset, stopLine, stopCol, stopOffset) values (?, ?, ?, ?, ?, ?, ?, ?)'
@@ -36,7 +36,7 @@ class FunctionRuleMatch(RuleMatch):
       self.data['stopCol'],
       self.data['stopOffset']))
 
-    curr.commit()
+    conn.commit()
 
 
 class MethodRuleMatch(RuleMatch):
@@ -58,7 +58,7 @@ class MethodRuleMatch(RuleMatch):
     '''
     curr = conn.cursor()
     curr.execute(sql)
-    curr.commit()
+    conn.commit()
 
   def write(self, conn):
     sql = 'insert into function (receiver, name, file, startLine, startCol, startOffset, stopLine, stopCol, stopOffset) values (?, ?, ?, ?, ?, ?, ?, ?, ?)'
@@ -75,4 +75,4 @@ class MethodRuleMatch(RuleMatch):
       self.data['stopCol'],
       self.data['stopOffset']))
 
-    curr.commit()
+    conn.commit()

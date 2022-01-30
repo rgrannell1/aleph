@@ -14,6 +14,7 @@ class DependencyRuleMatch(RuleMatch):
     '''
     curr = conn.cursor()
     curr.execute(sql)
+    conn.commit()
 
   def write(self, conn):
     sql = 'insert or replace into dependency (name, file) values (?, ?)'
@@ -23,3 +24,5 @@ class DependencyRuleMatch(RuleMatch):
       curr.execute(sql, (
         pkg,
         self.data['fpath']))
+
+    conn.commit()

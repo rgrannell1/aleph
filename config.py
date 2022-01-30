@@ -2,6 +2,7 @@
 import json
 
 class Config:
+  """Load configuration from a JSON file"""
   def __init__(self, fpath: str):
     with open(fpath) as conn:
       data = json.load(conn)

@@ -1,7 +1,5 @@
 
-from go.imports import GoImport, GoMultiImport
 from rule import Rule, RuleMatch
-from rule_set import RuleSet
 from comby import Comby
 
 
