@@ -3,10 +3,11 @@ from rule_set import RuleSet
 from go.ruleset import GoRuleSet
 from js.ruleset import JsRuleSet
 from py.ruleset import PyRuleSet
-from ts.ruleset import TsRuleSet
 
 
 class CombyMatcher:
+  """Extract all interesting information for each programming language supported."""
+
   @staticmethod
   def matches(fpath: str, ruleSet: RuleSet):
     with open(fpath) as conn:
@@ -29,7 +30,7 @@ class CombyMatcher:
 
   @staticmethod
   def ts(fpath: str):
-    return CombyMatcher.matches(fpath, TsRuleSet)
+    return CombyMatcher.matches(fpath, JsRuleSet)
 
   @staticmethod
   def py(fpath: str):

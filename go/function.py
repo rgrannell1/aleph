@@ -4,6 +4,8 @@ from comby import Comby
 
 
 class GoMethod(Rule):
+  """Extract method definition information for Golang"""
+
   pattern = 'func (:[[receiver]] *[[type]]) [[name]]'
 
   @classmethod
@@ -18,6 +20,8 @@ class GoMethod(Rule):
 
 
 class GoFunction(Rule):
+  """Extract function definition information for Golang"""
+
   pattern = 'func (:[[receiver]] *[[type]]) [[name]]'
 
   @classmethod

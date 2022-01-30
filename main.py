@@ -8,6 +8,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 def main():
+  """Extract codebase information and save information"""
+
   conn = sqlite3.connect("/home/rg/.aleph.sqlite")
   cfg = Config("./config.json")
   base = CodeBase(cfg)

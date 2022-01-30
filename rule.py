@@ -5,19 +5,27 @@ from abc import abstractmethod
 
 
 class RuleMatch:
+  """Contains information for each extracted piece of code-information"""
+
   def __init__(self, data):
     self.data = data
 
 
   @abstractmethod
   def create_table(self, conn):
+    """Construct an sqlite table to store information"""
     pass
 
   @abstractmethod
   def write(self, conn):
+    """Write SQL information to sqlite"""
     pass
 
 
 class Rule:
+  """Contains rule information, describing some aspect of the code we want to extract"""
+
   def log(name: str, match: comby.Match):
-    logging.info(f"Matched {name}\n\n{match.matched}\n\n")
+    """Log debug information for matched rule data"""
+
+    logging.debug(f"Matched {name}\n\n{match.matched}\n\n")

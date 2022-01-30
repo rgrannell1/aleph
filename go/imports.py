@@ -6,6 +6,8 @@ from comby import Comby
 
 
 class GoMultiImport(Rule):
+  """Read go multi imports and extract package information"""
+
   pattern = 'import (:[imports])'
 
   @classmethod
@@ -24,6 +26,8 @@ class GoMultiImport(Rule):
 
 
 class GoImport(Rule):
+  """Read go single import and extract package information"""
+
   pattern = 'import ":[import]"'
 
   @classmethod
