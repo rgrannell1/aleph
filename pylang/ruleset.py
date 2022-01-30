@@ -1,4 +1,5 @@
 
+from pylang.function import PyFunction
 from pylang.imports import PyFromImport, PyImport
 from rule_set import RuleSet
 
@@ -8,5 +9,6 @@ class PyRuleSet(RuleSet):
 
   rules = [
     PyFromImport,
-    PyImport
+    PyImport,
+    PyFunction
   ]
