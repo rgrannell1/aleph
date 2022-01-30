@@ -19,14 +19,14 @@ class PyFromImport(Rule):
       cls.log(cls.__name__, match)
       yield DependencyRuleMatch({
         "packages": [frag],
-        "fpath": fpath
+        "file": fpath
       })
 
 
 class PyImport(Rule):
   """A single module import, capturing the target module"""
 
-  pattern = ':[~^\s*]import :[import]'
+  pattern = ':[~^import] :[import]'
 
   @classmethod
   def matches(cls, fpath: str, content: str) -> RuleMatch:
@@ -38,5 +38,5 @@ class PyImport(Rule):
       cls.log(cls.__name__, match)
       yield DependencyRuleMatch({
         "packages": [frag],
-        "fpath": fpath
+        "file": fpath
       })

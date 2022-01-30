@@ -1,5 +1,5 @@
 
-from py.ruleset import PyRuleSet
+from pylang.ruleset import PyRuleSet
 from rule_set import RuleSet
 from go.ruleset import GoRuleSet
 from js.ruleset import JsRuleSet

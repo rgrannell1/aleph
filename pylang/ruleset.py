@@ -1,5 +1,5 @@
 
-from py.imports import PyFromImport, PyImport
+from pylang.imports import PyFromImport, PyImport
 from rule_set import RuleSet
 
 
