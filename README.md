@@ -10,6 +10,25 @@ Extract codebase information as structured data.
 aleph <codebase>
 ```
 
+## File-Structure
+
+```
+bs/                 build-system files
+go/                 go code-extraction rules
+js/                 js & adjacent language code-extraction rules
+py/                 python code-extraction rules
+matches/            holds extracted codebase information, and operations to store it
+
+config.py           class for loading configuration
+config.json         my codebase configuration
+file.py             operations for interacting with files and listing projects
+main.py             runs code-extraction
+
+rule_set.py         a class representing groups of code-extraction rules
+rule.py             classes representing code-extraction rules and match information
+comby_matcher.py    code for interacting with the code-search tool `comby`
+```
+
 ## Description
 
 Aleph extracts codebase information into a sqlite database. This information includes:
