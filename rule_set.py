@@ -1,8 +1,4 @@
 
-
-from rule import RuleMatch
-
-
 class RuleSet:
 
   @classmethod

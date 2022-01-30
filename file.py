@@ -64,12 +64,15 @@ class ProjectFile:
     ext = pathlib.Path(fpath).suffix
 
     if ext == '.go':
-      return CombyMatcher.go(fpath)
+      matches = CombyMatcher.go(fpath)
     elif ext == '.js' or ext == '.jsx':
-      return CombyMatcher.js(fpath)
+      matches = CombyMatcher.js(fpath)
     elif ext == '.ts' or ext == '.tsx':
-      return CombyMatcher.ts(fpath)
+      matches = CombyMatcher.ts(fpath)
     elif ext == '.py':
-      return CombyMatcher.py(fpath)
+      matches = CombyMatcher.py(fpath)
     else:
       raise Exception(fpath)
+
+    for match in matches:
+      yield match

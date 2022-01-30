@@ -1,32 +1,36 @@
 
 from rule_set import RuleSet
-from rules_go import GoRuleSet
-from rules_js import JsRuleSet
-from rules_py import PyRuleSet
-from rules_ts import TsRuleSet
+from go.rules import GoRuleSet
+from js.rules import JsRuleSet
+from py.rules import PyRuleSet
+from ts.rules import TsRuleSet
 
 
 class CombyMatcher:
   @staticmethod
   def matches(fpath: str, ruleSet: RuleSet):
     with open(fpath) as conn:
-      content = conn.read()
+      try:
+        content = conn.read()
+      except Exception as err:
+        print(err)
+        return
 
     for match in ruleSet.matches(fpath, content):
-      print(match.data)
+      yield match
 
   @staticmethod
   def go(fpath: str):
-    CombyMatcher.matches(fpath, GoRuleSet)
+    return CombyMatcher.matches(fpath, GoRuleSet)
 
   @staticmethod
   def js(fpath: str):
-    CombyMatcher.matches(fpath, JsRuleSet)
+    return CombyMatcher.matches(fpath, JsRuleSet)
 
   @staticmethod
   def ts(fpath: str):
-    CombyMatcher.matches(fpath, TsRuleSet)
+    return CombyMatcher.matches(fpath, TsRuleSet)
 
   @staticmethod
   def py(fpath: str):
-    CombyMatcher.matches(fpath, PyRuleSet)
+    return CombyMatcher.matches(fpath, PyRuleSet)
