@@ -1,9 +1,9 @@
 
 from rule_set import RuleSet
-from go.rules import GoRuleSet
-from js.rules import JsRuleSet
-from py.rules import PyRuleSet
-from ts.rules import TsRuleSet
+from go.ruleset import GoRuleSet
+from js.ruleset import JsRuleSet
+from py.ruleset import PyRuleSet
+from ts.ruleset import TsRuleSet
 
 
 class CombyMatcher:

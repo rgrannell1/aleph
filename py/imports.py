@@ -1,11 +1,12 @@
 
-import logging
 from matches.dependency import DependencyRuleMatch
 from rule import Rule, RuleMatch
 from comby import Comby
 
 
 class PyFromImport(Rule):
+  """A `from module` import in python, capturing the target module"""
+
   pattern = 'from :[import] import'
 
   @classmethod
@@ -23,6 +24,8 @@ class PyFromImport(Rule):
 
 
 class PyImport(Rule):
+  """A single module import, capturing the target module"""
+
   pattern = ':[~^\s*]import :[import]'
 
   @classmethod
