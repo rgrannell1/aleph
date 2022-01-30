@@ -20,8 +20,8 @@ class GoMultiImport(Rule):
           'raw_unicode_escape').decode('unicode_escape').replace('"', '').split('\n') if len(pkg.strip()) > 0]
 
       yield DependencyRuleMatch({
-          "packages": pkgs,
-          "fpath": fpath
+        "packages": pkgs,
+        "fpath": fpath
       })
 
 
@@ -40,6 +40,6 @@ class GoImport(Rule):
         frag = match.environment['import'].fragment
 
         yield DependencyRuleMatch({
-            "packages": [frag],
-            "fpath": fpath
+          "packages": [frag],
+          "fpath": fpath
         })

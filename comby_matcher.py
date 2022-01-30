@@ -1,8 +1,8 @@
 
+from py.ruleset import PyRuleSet
 from rule_set import RuleSet
 from go.ruleset import GoRuleSet
 from js.ruleset import JsRuleSet
-from py.ruleset import PyRuleSet
 
 
 class CombyMatcher:

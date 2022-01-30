@@ -3,6 +3,17 @@ from rule import RuleMatch
 
 
 class FunctionRuleMatch(RuleMatch):
+  props = {
+    'name',
+    'file',
+    'startLine',
+    'startCol',
+    'startOffset',
+    'stopLine',
+    'stopCol',
+    'stopOffset'
+  }
+
   def create_table(self, conn):
     sql = '''
     create table if not exists function (
@@ -40,6 +51,19 @@ class FunctionRuleMatch(RuleMatch):
 
 
 class MethodRuleMatch(RuleMatch):
+  props = {
+    'receiver',
+    'name',
+    'file',
+    'startLine',
+    'startCol',
+    'startOffset',
+    'stopLine',
+    'stopCol',
+    'stopOffset'
+  }
+
+
   def create_table(self, conn):
     sql = '''
     create table if not exists method (

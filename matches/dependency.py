@@ -3,6 +3,11 @@ from rule import RuleMatch
 
 
 class DependencyRuleMatch(RuleMatch):
+  props = {
+    'name',
+    'file'
+  }
+
   def create_table(self, conn):
     sql = '''
     create table if not exists dependency (

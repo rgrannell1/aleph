@@ -1,4 +1,5 @@
 
+from matches.function import FunctionRuleMatch, MethodRuleMatch
 from rule import Rule, RuleMatch
 from comby import Comby
 
@@ -9,12 +10,12 @@ class GoMethod(Rule):
   pattern = 'func (:[[receiver]] *:[[type]]) :[[name]]'
 
   @classmethod
-  def matches(cls, fpath: str, content: str) -> RuleMatch:
+  def matches(cls, fpath: str, content: str) -> MethodRuleMatch:
     """"""
 
     comby = Comby()
     for match in comby.matches(content, cls.pattern):
-      yield RuleMatch({
+      yield MethodRuleMatch({
         "fpath": fpath,
         "receiver": match.environment['receiver'].fragment,
         "type": match.environment['type'].fragment,
@@ -28,12 +29,12 @@ class GoFunction(Rule):
   pattern = 'func :[[name]] (...)'
 
   @classmethod
-  def matches(cls, fpath: str, content: str) -> RuleMatch:
+  def matches(cls, fpath: str, content: str) -> FunctionRuleMatch:
     """"""
 
     comby = Comby()
     for match in comby.matches(content, cls.pattern):
-      yield RuleMatch({
+      yield FunctionRuleMatch({
         "fpath": fpath,
         "name": match.environment['name'].fragment
       })
