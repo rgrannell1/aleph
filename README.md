@@ -1,6 +1,6 @@
 
 # Aleph
---
+---
 
 Extract codebase information as structured data.
 
