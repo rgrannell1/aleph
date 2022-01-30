@@ -32,13 +32,11 @@ class TestPyImport(unittest.TestCase):
     for src, imported in cases:
       matches = list(PyImport.matches(fpath, src))
 
-      assert len(matches) == 1
-      data = matches[0].data
+      assert len(matches) == len(imported)
 
-      assert data['file'] == fpath
-      assert len(data['packages']) == len(imported)
+      if len(matches) > 0:
+        data = matches[0].data
 
-      if len(data['packages']) == 0:
-        assert len(data['packages']) == 0
-      else:
+        assert data['file'] == fpath
+        assert len(data['packages']) == len(imported)
         assert data['packages'][0] == imported[0]

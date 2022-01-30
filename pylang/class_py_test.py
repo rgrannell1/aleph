@@ -6,14 +6,15 @@ from pylang.cclass import PyClass, PyClassExtends
 class TestPyClass(unittest.TestCase):
   def testPyClass(self):
     cases = [
-      ('   class Testing', 'Testing'),
+      ('class Testing:', 'Testing'),
+      ('   class Testing:', 'Testing'),
     ]
 
     fpath = 'test.py'
     for src, expected in cases:
       matches = list(PyClass.matches(fpath, src))
 
-      assert len(matches) == 1
+      assert len(matches) == 1, f"failed get matches for PyClass '{src}'"
       data = matches[0].data
 
       assert data['name'] == expected
@@ -30,7 +31,7 @@ class TestPyClassExtends(unittest.TestCase):
       name, extends = expected
 
       matches = list(PyClassExtends.matches(fpath, src))
-      assert len(matches) == 1
+      assert len(matches) == 1, f"failed get matches for PyClassExtends '{src}'"
       data = matches[0].data
 
       assert data['name'] == name
