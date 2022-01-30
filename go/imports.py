@@ -21,7 +21,7 @@ class GoMultiImport(Rule):
 
       yield DependencyRuleMatch({
         "packages": pkgs,
-        "fpath": fpath
+        "file": fpath
       })
 
 
@@ -41,5 +41,5 @@ class GoImport(Rule):
 
         yield DependencyRuleMatch({
           "packages": [frag],
-          "fpath": fpath
+          "file": fpath
         })

@@ -11,7 +11,7 @@ class RuleMatch:
   def __init__(self, data):
     for prop in self.props:
       if not prop in data:
-        raise Exception(f'missing property {prop}')
+        raise Exception(f'missing property {prop} from {self}')
     self.data = data
 
 

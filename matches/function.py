@@ -54,6 +54,7 @@ class MethodRuleMatch(RuleMatch):
   props = {
     'receiver',
     'name',
+    'type',
     'file',
     'startLine',
     'startCol',
@@ -67,9 +68,10 @@ class MethodRuleMatch(RuleMatch):
   def create_table(self, conn):
     sql = '''
     create table if not exists method (
-      receiver    string not null,
-      name        string not null,
       file        string not null,
+      receiver    string not null,
+      type        string not null,
+      name        string not null,
       startLine   integer,
       startCol    integer,
       startOffset integer,

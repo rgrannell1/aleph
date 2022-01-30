@@ -4,7 +4,7 @@ from rule import RuleMatch
 
 class DependencyRuleMatch(RuleMatch):
   props = {
-    'name',
+    'packages',
     'file'
   }
 
@@ -28,6 +28,6 @@ class DependencyRuleMatch(RuleMatch):
     for pkg in self.data['packages']:
       curr.execute(sql, (
         pkg,
-        self.data['fpath']))
+        self.data['file']))
 
     conn.commit()

@@ -37,4 +37,4 @@ class TestGoImport(unittest.TestCase):
       data = matches[0].data
 
       assert data['packages'][0] == imported
-      assert data['fpath'] == 'test.go'
+      assert data['file'] == 'test.go'

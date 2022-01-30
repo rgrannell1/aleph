@@ -16,10 +16,16 @@ class GoMethod(Rule):
     comby = Comby()
     for match in comby.matches(content, cls.pattern):
       yield MethodRuleMatch({
-        "fpath": fpath,
+        "file": fpath,
         "receiver": match.environment['receiver'].fragment,
         "type": match.environment['type'].fragment,
-        "name": match.environment['name'].fragment
+        "name": match.environment['name'].fragment,
+        "startLine": 0,
+        "startCol": 0,
+        "startOffset": 0,
+        "stopLine": 0,
+        "stopCol": 0,
+        "stopOffset": 0
       })
 
 
@@ -35,6 +41,13 @@ class GoFunction(Rule):
     comby = Comby()
     for match in comby.matches(content, cls.pattern):
       yield FunctionRuleMatch({
-        "fpath": fpath,
-        "name": match.environment['name'].fragment
+        "file": fpath,
+        "type": match.environment['type'].fragment,
+        "name": match.environment['name'].fragment,
+        "startLine": 0,
+        "startCol": 0,
+        "startOffset": 0,
+        "stopLine": 0,
+        "stopCol": 0,
+        "stopOffset": 0
       })
