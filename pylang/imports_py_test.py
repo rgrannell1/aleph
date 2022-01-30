@@ -1,7 +1,5 @@
 import unittest
 
-from sympy import false
-
 from pylang.imports import PyFromImport, PyImport
 
 
