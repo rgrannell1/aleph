@@ -42,7 +42,7 @@ class GoFunction(Rule):
     for match in comby.matches(content, cls.pattern):
       yield FunctionRuleMatch({
         "file": fpath,
-        "type": match.environment['type'].fragment,
+        "type": "",
         "name": match.environment['name'].fragment,
         "startLine": 0,
         "startCol": 0,
