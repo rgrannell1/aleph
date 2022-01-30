@@ -20,12 +20,12 @@ class GoMethod(Rule):
         "receiver": match.environment['receiver'].fragment,
         "type": match.environment['type'].fragment,
         "name": match.environment['name'].fragment,
-        "startLine": 0,
-        "startCol": 0,
-        "startOffset": 0,
-        "stopLine": 0,
-        "stopCol": 0,
-        "stopOffset": 0
+        "startLine": match.location.start.line,
+        "startCol": match.location.start.col,
+        "startOffset": match.location.start.offset,
+        "stopLine": match.location.stop.line,
+        "stopCol": match.location.stop.col,
+        "stopOffset": match.location.stop.offset
       })
 
 
@@ -44,10 +44,10 @@ class GoFunction(Rule):
         "file": fpath,
         "type": "",
         "name": match.environment['name'].fragment,
-        "startLine": 0,
-        "startCol": 0,
-        "startOffset": 0,
-        "stopLine": 0,
-        "stopCol": 0,
-        "stopOffset": 0
+        "startLine": match.location.start.line,
+        "startCol": match.location.start.col,
+        "startOffset": match.location.start.offset,
+        "stopLine": match.location.stop.line,
+        "stopCol": match.location.stop.col,
+        "stopOffset": match.location.stop.offset
       })

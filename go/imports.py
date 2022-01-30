@@ -21,7 +21,13 @@ class GoMultiImport(Rule):
 
       yield DependencyRuleMatch({
         "packages": pkgs,
-        "file": fpath
+        "file": fpath,
+        "startLine": match.location.start.line,
+        "startCol": match.location.start.col,
+        "startOffset": match.location.start.offset,
+        "stopLine": match.location.stop.line,
+        "stopCol": match.location.stop.col,
+        "stopOffset": match.location.stop.offset
       })
 
 
@@ -41,5 +47,11 @@ class GoImport(Rule):
 
         yield DependencyRuleMatch({
           "packages": [frag],
-          "file": fpath
+          "file": fpath,
+          "startLine": match.location.start.line,
+          "startCol": match.location.start.col,
+          "startOffset": match.location.start.offset,
+          "stopLine": match.location.stop.line,
+          "stopCol": match.location.stop.col,
+          "stopOffset": match.location.stop.offset
         })

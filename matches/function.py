@@ -27,7 +27,7 @@ class FunctionRuleMatch(RuleMatch):
       stopCol     integer,
       stopOffset  integer,
 
-      primary key(name, file)
+      primary key(name, file, startLine, startCol, startOffset, stopLine, stopCol, stopOffset)
     );
     '''
     curr = conn.cursor()
@@ -35,7 +35,7 @@ class FunctionRuleMatch(RuleMatch):
     conn.commit()
 
   def write(self, conn):
-    sql = 'insert into function (name, file, startLine, startCol, startOffset, stopLine, stopCol, stopOffset) values (?, ?, ?, ?, ?, ?, ?, ?)'
+    sql = 'insert or replace into function (name, file, startLine, startCol, startOffset, stopLine, stopCol, stopOffset) values (?, ?, ?, ?, ?, ?, ?, ?)'
 
     curr = conn.cursor()
     curr.execute(sql, (
@@ -71,7 +71,7 @@ class MethodRuleMatch(RuleMatch):
     create table if not exists method (
       file        string not null,
       receiver    string not null,
-      type        string not null,
+      type        string,
       name        string not null,
       startLine   integer,
       startCol    integer,
@@ -80,7 +80,7 @@ class MethodRuleMatch(RuleMatch):
       stopCol     integer,
       stopOffset  integer,
 
-      primary key(name, file)
+      primary key(file, receiver, type, name, startLine, startCol, startOffset, stopLine, stopCol, stopOffset)
     );
     '''
     curr = conn.cursor()
@@ -88,7 +88,7 @@ class MethodRuleMatch(RuleMatch):
     conn.commit()
 
   def write(self, conn):
-    sql = 'insert into function (receiver, name, file, startLine, startCol, startOffset, stopLine, stopCol, stopOffset) values (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    sql = 'insert into method (receiver, name, file, startLine, startCol, startOffset, stopLine, stopCol, stopOffset) values (?, ?, ?, ?, ?, ?, ?, ?, ?)'
 
     curr = conn.cursor()
     curr.execute(sql, (

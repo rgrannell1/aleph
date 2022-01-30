@@ -21,10 +21,9 @@ class ClassRuleMatch(RuleMatch):
   def create_table(self, conn):
     sql = '''
     create table if not exists class (
-      file        string not null,
-      receiver    string not null,
-      type        string not null,
       name        string not null,
+      file        string not null,
+      extends     string not null,
       startLine   integer,
       startCol    integer,
       startOffset integer,
@@ -40,13 +39,13 @@ class ClassRuleMatch(RuleMatch):
     conn.commit()
 
   def write(self, conn):
-    sql = 'insert into function (receiver, name, file, startLine, startCol, startOffset, stopLine, stopCol, stopOffset) values (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    sql = 'insert or replace into class (name, file, extends, startLine, startCol, startOffset, stopLine, stopCol, stopOffset) values (?, ?, ?, ?, ?, ?, ?, ?, ?)'
 
     curr = conn.cursor()
     curr.execute(sql, (
-      self.data['receiver'],
       self.data['name'],
       self.data['file'],
+      self.data['extends'],
       self.data['startLine'],
       self.data['startCol'],
       self.data['startOffset'],
