@@ -1,6 +1,6 @@
 
 from matches.dependency import DependencyRuleMatch
-from rule import Rule, RuleMatch
+from rule import Rule
 from comby import Comby
 
 
@@ -11,7 +11,7 @@ class GoMultiImport(Rule):
   pattern = 'import (:[imports])'
 
   @classmethod
-  def matches(cls, fpath: str, content: str) -> RuleMatch:
+  def matches(cls, fpath: str, content: str) -> DependencyRuleMatch:
     comby = Comby()
 
     for match in comby.matches(content, cls.pattern):
@@ -31,7 +31,7 @@ class GoImport(Rule):
   pattern = 'import ":[import]"'
 
   @classmethod
-  def matches(cls, fpath: str, content: str) -> RuleMatch:
+  def matches(cls, fpath: str, content: str) -> DependencyRuleMatch:
     comby = Comby()
     for match in comby.matches(content, cls.pattern):
       comby = Comby()

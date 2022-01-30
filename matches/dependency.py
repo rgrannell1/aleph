@@ -1,5 +1,7 @@
 
-from rule import RuleMatch
+
+
+from rule_match import RuleMatch
 
 
 class DependencyRuleMatch(RuleMatch):

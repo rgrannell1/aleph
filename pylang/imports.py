@@ -1,7 +1,8 @@
 
 from matches.dependency import DependencyRuleMatch
-from rule import Rule, RuleMatch
+from rule import Rule
 from comby import Comby
+from rule_match import RuleMatch
 
 
 class PyFromImport(Rule):

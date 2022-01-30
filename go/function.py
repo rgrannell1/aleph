@@ -1,6 +1,6 @@
 
 from matches.function import FunctionRuleMatch, MethodRuleMatch
-from rule import Rule, RuleMatch
+from rule import Rule
 from comby import Comby
 
 
