@@ -17,7 +17,7 @@ class GoMultiImport(Rule):
     for match in comby.matches(content, cls.pattern):
       frag = match.environment['imports'].fragment
       pkgs = [pkg.strip() for pkg in frag.encode(
-          'raw_unicode_escape').decode('unicode_escape').replace('"', '').split('\n') if len(pkg) > 0]
+          'raw_unicode_escape').decode('unicode_escape').replace('"', '').split('\n') if len(pkg.strip()) > 0]
 
       yield DependencyRuleMatch({
           "packages": pkgs,
