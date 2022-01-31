@@ -9,12 +9,7 @@ class ClassRuleMatch(RuleMatch):
     'name',
     'file',
     'extends',
-    'startLine',
-    'startCol',
-    'startOffset',
-    'stopLine',
-    'stopCol',
-    'stopOffset'
+    'location'
   }
 
 
@@ -40,17 +35,25 @@ class ClassRuleMatch(RuleMatch):
 
   def write(self, conn):
     sql = 'insert or replace into class (name, file, extends, startLine, startCol, startOffset, stopLine, stopCol, stopOffset) values (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    loc = self.data['location']
+
+    curr = conn.cursor()
+    curr.execute(sql, (
+      self.data['name'],
+      self.data['file'],
+
+    ))
 
     curr = conn.cursor()
     curr.execute(sql, (
       self.data['name'],
       self.data['file'],
       self.data['extends'],
-      self.data['startLine'],
-      self.data['startCol'],
-      self.data['startOffset'],
-      self.data['stopLine'],
-      self.data['stopCol'],
-      self.data['stopOffset']))
+      loc.start.line,
+      loc.start.col,
+      loc.start.offset,
+      loc.stop.line,
+      loc.stop.col,
+      loc.stop.offset))
 
     conn.commit()

@@ -24,7 +24,7 @@ class TestFunctionCall(unittest.TestCase):
   def testPyFunctionCall(self):
     cases = [
       ('foobar()', 'foobar'),
-      ('def bazbar()', None),
+      ('def bazbar():', None),
       ('bingbar(a, b, "123")', 'bingbar')
     ]
 
