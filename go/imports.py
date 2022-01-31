@@ -8,41 +8,52 @@ from comby import Comby
 class GoMultiImport(Rule):
   """Read go multi imports and extract package information"""
 
-  pattern = 'import (:[imports])'
+  patterns = ['import (:[imports])']
 
   @classmethod
   def matches(cls, fpath: str, content: str) -> DependencyRuleMatch:
     comby = Comby()
 
-    for match in comby.matches(content, cls.pattern):
-      frag = match.environment['imports'].fragment
-      pkgs = [pkg.strip() for pkg in frag.encode(
-          'raw_unicode_escape').decode('unicode_escape').replace('"', '').split('\n') if len(pkg.strip()) > 0]
+    matched = False
 
-      yield DependencyRuleMatch({
-        "packages": pkgs,
-        "file": fpath,
-        "startLine": match.location.start.line,
-        "startCol": match.location.start.col,
-        "startOffset": match.location.start.offset,
-        "stopLine": match.location.stop.line,
-        "stopCol": match.location.stop.col,
-        "stopOffset": match.location.stop.offset
-      })
+    for pattern in cls.patterns:
+      for match in comby.matches(content, pattern):
+        matched = True
+
+        frag = match.environment['imports'].fragment
+        pkgs = [pkg.strip() for pkg in frag.encode(
+            'raw_unicode_escape').decode('unicode_escape').replace('"', '').split('\n') if len(pkg.strip()) > 0]
+
+        yield DependencyRuleMatch({
+          "packages": pkgs,
+          "file": fpath,
+          "startLine": match.location.start.line,
+          "startCol": match.location.start.col,
+          "startOffset": match.location.start.offset,
+          "stopLine": match.location.stop.line,
+          "stopCol": match.location.stop.col,
+          "stopOffset": match.location.stop.offset
+        })
+
+      if matched:
+        return
 
 
 class GoImport(Rule):
   """Read go single import and extract package information"""
 
-  pattern = 'import ":[import]"'
+  patterns = ['import ":[import]"']
 
   @classmethod
   def matches(cls, fpath: str, content: str) -> DependencyRuleMatch:
     comby = Comby()
-    for match in comby.matches(content, cls.pattern):
-      comby = Comby()
 
-      for match in comby.matches(content, cls.pattern):
+    matched = False
+
+    for pattern in cls.patterns:
+      for match in comby.matches(content, pattern):
+        matched = True
+
         frag = match.environment['import'].fragment
 
         yield DependencyRuleMatch({
@@ -55,3 +66,6 @@ class GoImport(Rule):
           "stopCol": match.location.stop.col,
           "stopOffset": match.location.stop.offset
         })
+
+      if matched:
+        return

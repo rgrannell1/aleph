@@ -16,6 +16,9 @@ def main():
 
   for project in base.list_projects():
     for fpath in project.list_source_files():
+      if '__init__' in fpath:
+        continue # it makes things stall for some reason
+
       logging.info(f"analysing {fpath}")
 
       for match in ProjectFile(fpath).matches():
@@ -23,6 +26,7 @@ def main():
           match.create_table(conn)
           match.write(conn)
 
+  logging.info("all projects analysed")
   conn.close()
 
 main()

@@ -7,22 +7,54 @@ from comby import Comby
 class PyFunction(Rule):
   """Extract function definition information for Python"""
 
-  pattern = 'def :[name](...)'
+  patterns = ['def :[name](...)']
 
   @classmethod
   def matches(cls, fpath: str, content: str) -> FunctionRuleMatch:
     """"""
 
     comby = Comby()
-    for match in comby.matches(content, cls.pattern):
-      yield FunctionRuleMatch({
+    matched = False
+
+    for pattern in cls.patterns:
+      for match in comby.matches(content, pattern):
+        matched = True
+
+        yield FunctionRuleMatch({
           "file": fpath,
           "type": "",
           "name": (match.environment['name'].fragment).strip(),
-          "startLine": match.location.start.line,
-          "startCol": match.location.start.col,
-          "startOffset": match.location.start.offset,
-          "stopLine": match.location.stop.line,
-          "stopCol": match.location.stop.col,
-          "stopOffset": match.location.stop.offset
-      })
+          "location": match.location
+        })
+
+      if matched:
+        return
+
+
+class PyFunctionCall(Rule):
+  """Extract function call information for Python"""
+
+  patterns = [
+    ':[prefix~[def ]*][name~[a-zA-Z0-9_]+](...)'
+  ]
+
+  @classmethod
+  def matches(cls, fpath: str, content: str) -> FunctionRuleMatch:
+    """"""
+
+    comby = Comby()
+    matched = False
+
+    for pattern in cls.patterns:
+      for match in comby.matches(content, pattern):
+        matched = True
+
+        yield FunctionRuleMatch({
+          "file": fpath,
+          "type": "",
+          "name": (match.environment['name'].fragment).strip(),
+          "location": match.location
+        })
+
+      if matched:
+        return
