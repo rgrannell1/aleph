@@ -42,9 +42,9 @@ class PyClassExtends(Rule):
       extends = match.environment['extends'].fragment.strip()
 
       yield ClassRuleMatch({
-          "file": fpath,
-          "extends": extends,
-          "name": name,
-          "location": match.location
+        "file": fpath,
+        "extends": extends,
+        "name": name,
+        "location": match.location
       })
 

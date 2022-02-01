@@ -41,13 +41,6 @@ class ClassRuleMatch(RuleMatch):
     curr.execute(sql, (
       self.data['name'],
       self.data['file'],
-
-    ))
-
-    curr = conn.cursor()
-    curr.execute(sql, (
-      self.data['name'],
-      self.data['file'],
       self.data['extends'],
       loc.start.line,
       loc.start.col,

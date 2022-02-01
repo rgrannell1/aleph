@@ -99,18 +99,20 @@ class MethodRuleMatch(RuleMatch):
     conn.commit()
 
 
-class FunctionCallRuleMatch(RuleMatch):
+class CallRuleMatch(RuleMatch):
   props = {
     'name',
     'file',
+    'arguments',
     'location'
   }
 
   def create_table(self, conn):
     sql = '''
-    create table if not exists method (
+    create table if not exists call (
       name        string not null,
       file        string not null,
+      arguments   string not null,
       startLine   integer,
       startCol    integer,
       startOffset integer,
@@ -118,7 +120,7 @@ class FunctionCallRuleMatch(RuleMatch):
       stopCol     integer,
       stopOffset  integer,
 
-      primary key(name, file, startLine, startCol, startOffset, stopLine, stopCol, stopOffset)
+      primary key(name, file, arguments, startLine, startCol, startOffset, stopLine, stopCol, stopOffset)
     );
     '''
     curr = conn.cursor()
@@ -126,13 +128,14 @@ class FunctionCallRuleMatch(RuleMatch):
     conn.commit()
 
   def write(self, conn):
-    sql = 'insert into function_call (name, file, startLine, startCol, startOffset, stopLine, stopCol, stopOffset) values (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    sql = 'insert or replace into call (name, file, arguments, startLine, startCol, startOffset, stopLine, stopCol, stopOffset) values (?, ?, ?, ?, ?, ?, ?, ?, ?)'
     loc = self.data['location']
 
     curr = conn.cursor()
     curr.execute(sql, (
       self.data['name'],
       self.data['file'],
+      self.data['arguments'],
       loc.start.line,
       loc.start.col,
       loc.start.offset,

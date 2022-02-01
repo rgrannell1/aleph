@@ -13,6 +13,9 @@ class CombyMatcher:
     with open(fpath) as conn:
       try:
         content = conn.read()
+
+        if len(content) == 0:
+          return
       except Exception as err:
         print(err)
         return

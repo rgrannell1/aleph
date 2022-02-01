@@ -1,5 +1,5 @@
 
-from go.function import GoFunction, GoMethod
+from go.function import GoCall, GoFunction, GoMethod
 from go.imports import GoImport, GoMultiImport
 from rule_set import RuleSet
 
@@ -11,5 +11,6 @@ class GoRuleSet(RuleSet):
     GoMethod,
     GoFunction,
     GoMultiImport,
-    GoImport
+    GoImport,
+    GoCall
   ]
